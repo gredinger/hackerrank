@@ -1,6 +1,10 @@
 package main
 
 import (
+	"bytes"
+	"log"
+	"os"
+	"strings"
 	"testing"
 )
 
@@ -96,9 +100,9 @@ func TestDiagonalDifference(t *testing.T) {
 			name: "test1",
 			args: args{
 				arr: [][]int32{
-					[]int32{11, 2, 4},
-					[]int32{4, 5, 6},
-					[]int32{10, 8, -12},
+					{11, 2, 4},
+					{4, 5, 6},
+					{10, 8, -12},
 				},
 			},
 			want: 15,
@@ -115,7 +119,7 @@ func TestDiagonalDifference(t *testing.T) {
 
 // generated w/ modifications
 // need to figure out how to monitor fmt.Println('') output from a function call
-/*
+
 func TestPlusMinus(t *testing.T) {
 	type args struct {
 		arr []int32
@@ -135,10 +139,18 @@ func TestPlusMinus(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			PlusMinus(tt.args.arr)
-			if got := PlusMinus(tt.args.arr); got != tt.want {
+			if got := captureOutput(func() { PlusMinus(tt.args.arr) }); strings.EqualFold(got, tt.want) {
 				t.Errorf("PlusMinus() = %v, want %v", got, tt.want)
 			}
 		})
 	}
-}*/
+}
+
+// stolen from https://stackoverflow.com/questions/26804642/how-to-test-a-functions-output-stdout-stderr-in-unit-tests
+func captureOutput(f func()) string {
+	var buf bytes.Buffer
+	log.SetOutput(&buf)
+	f()
+	log.SetOutput(os.Stderr)
+	return buf.String()
+}

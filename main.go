@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main() {
 	// do nothing
 }
@@ -63,8 +65,19 @@ func AbsDiff(a int32, b int32) int32 {
 	return c
 }
 
-// plus-minus [TODO: TESTING ]
+// plus-minus
 func PlusMinus(arr []int32) {
-	// Write your code here
-
+	var pP, nN, nZ float64
+	ar := float64(len(arr))
+	for _, x := range arr {
+		switch {
+		case x > 0:
+			pP++
+		case x < 0:
+			nN++
+		default:
+			nZ++
+		}
+	}
+	fmt.Printf("%.6f\n%.6f\n%.6f", pP/ar, nN/ar, nZ/ar)
 }
