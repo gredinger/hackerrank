@@ -102,13 +102,30 @@ func ClimbingLeaderboard(ranked []int32, player []int32) []int32 {
 	// sorted rank;
 	sRanked := removeDuplicate(ranked)
 	var playerPos []int32
-	for _, p := range player {
+	hwp := len(player) / 2
+	for pc, p := range player {
 		hs := false
-		for i, s := range sRanked {
-			if p >= s {
-				playerPos = append(playerPos, int32(i+1))
-				hs = true
-				break
+		if pc > hwp { // start at begining of list
+			for i, s := range sRanked {
+				if p >= s {
+					playerPos = append(playerPos, int32(i+1))
+					hs = true
+					break // found best score, leave
+				}
+			}
+		} else { // start at end of list
+			var pr int32
+			for i := len(sRanked) - 1; i >= 0; i-- {
+				if p >= sRanked[i] {
+					pr = int32(i + 1)
+					hs = true
+				}
+				if p <= sRanked[i] {
+					break // not gonna find a better score
+				}
+			}
+			if pr > 0 {
+				playerPos = append(playerPos, pr)
 			}
 		}
 		if !hs {
