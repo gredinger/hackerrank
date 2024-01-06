@@ -96,3 +96,37 @@ func Starcase(n int32) {
 		}
 	}
 }
+
+// climbing-the-leaderboard
+func ClimbingLeaderboard(ranked []int32, player []int32) []int32 {
+	// sorted rank;
+	sRanked := removeDuplicate(ranked)
+	var playerPos []int32
+	for _, p := range player {
+		hs := false
+		for i, s := range sRanked {
+			if p >= s {
+				playerPos = append(playerPos, int32(i+1))
+				hs = true
+				break
+			}
+		}
+		if !hs {
+			playerPos = append(playerPos, int32(len(sRanked)+1))
+		}
+	}
+	return playerPos
+}
+
+// stolen from https://stackoverflow.com/questions/66643946/how-to-remove-duplicates-strings-or-int-from-slice-in-go
+func removeDuplicate[T int32](sliceList []T) []T {
+	allKeys := make(map[T]bool)
+	list := []T{}
+	for _, item := range sliceList {
+		if _, value := allKeys[item]; !value {
+			allKeys[item] = true
+			list = append(list, item)
+		}
+	}
+	return list
+}

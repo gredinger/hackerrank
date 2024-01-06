@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"log"
 	"os"
+	"reflect"
 	"strings"
 	"testing"
 )
@@ -178,6 +179,42 @@ func TestStarcase(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := captureOutput(func() { Starcase(tt.args.n) }); strings.Compare(got, tt.want) == 0 {
 				t.Errorf("Starcase() = \n%v, want \n%v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestClimbingLeaderboard(t *testing.T) {
+	type args struct {
+		ranked []int32
+		player []int32
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int32
+	}{
+		{
+			name: "test1",
+			args: args{
+				ranked: []int32{100, 100, 50, 40, 40, 20, 10},
+				player: []int32{5, 25, 50, 120},
+			},
+			want: []int32{6, 4, 2, 1}},
+
+		{
+			name: "test2",
+			args: args{
+				ranked: []int32{100, 90, 90, 80, 75, 60},
+				player: []int32{50, 65, 77, 90, 102},
+			},
+			want: []int32{6, 5, 4, 2, 1},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ClimbingLeaderboard(tt.args.ranked, tt.args.player); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("ClimbingLeaderboard() = %v, want %v", got, tt.want)
 			}
 		})
 	}
