@@ -118,8 +118,6 @@ func TestDiagonalDifference(t *testing.T) {
 }
 
 // generated w/ modifications
-// need to figure out how to monitor fmt.Println('') output from a function call
-
 func TestPlusMinus(t *testing.T) {
 	type args struct {
 		arr []int32
@@ -153,4 +151,34 @@ func captureOutput(f func()) string {
 	f()
 	log.SetOutput(os.Stderr)
 	return buf.String()
+}
+
+func TestStarcase(t *testing.T) {
+	type args struct {
+		n int32
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "test1",
+			args: args{6},
+			want: `     #
+    ##
+   ###
+  ####
+ #####
+######
+`,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := captureOutput(func() { Starcase(tt.args.n) }); strings.Compare(got, tt.want) == 0 {
+				t.Errorf("Starcase() = \n%v, want \n%v", got, tt.want)
+			}
+		})
+	}
 }

@@ -81,3 +81,18 @@ func PlusMinus(arr []int32) {
 	}
 	fmt.Printf("%.6f\n%.6f\n%.6f", pP/ar, nN/ar, nZ/ar)
 }
+
+// staircase
+func Starcase(n int32) {
+	for i := 1; i <= int(n); i++ {
+		for x := 0; x < int(n)-i; x++ {
+			fmt.Print(" ")
+		}
+		for y := 0; y < i; y++ {
+			fmt.Print("#")
+		}
+		if i != int(n) {
+			fmt.Println()
+		}
+	}
+}
