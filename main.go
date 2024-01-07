@@ -147,3 +147,18 @@ func removeDuplicate[T int32](sliceList []T) []T {
 	}
 	return list
 }
+
+func BirthdayCakeCandles(candles []int32) int32 {
+	lc := 0
+	ln := int32(0)
+	for _, x := range candles {
+		if x > ln {
+			lc = 0
+			ln = x
+		}
+		if x == ln {
+			lc++
+		}
+	}
+	return int32(lc)
+}
