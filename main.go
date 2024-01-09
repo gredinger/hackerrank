@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main() {
 	// do nothing
@@ -148,6 +151,7 @@ func removeDuplicate[T int32](sliceList []T) []T {
 	return list
 }
 
+// birthday cake candles
 func BirthdayCakeCandles(candles []int32) int32 {
 	lc := 0
 	ln := int32(0)
@@ -161,4 +165,22 @@ func BirthdayCakeCandles(candles []int32) int32 {
 		}
 	}
 	return int32(lc)
+}
+
+// mini-max-sum
+func MiniMaxSum(arr []int32) {
+	highest := int32(0)
+	lowest := int32(math.Pow(2, 30))
+	total := int64(0)
+	for _, x := range arr {
+		if x > highest {
+			highest = x
+		}
+		if x < lowest {
+			lowest = x
+		}
+		total += int64(x)
+	}
+	fmt.Printf("%v %v", total-int64(highest), total-int64(lowest))
+
 }

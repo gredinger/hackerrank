@@ -244,3 +244,32 @@ func TestBirthdayCakeCandles(t *testing.T) {
 		})
 	}
 }
+
+func TestMiniMaxSum(t *testing.T) {
+	type args struct {
+		arr []int32
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		// TODO: Add test cases.
+		{
+			name: "test1",
+			args: args{arr: []int32{1, 2, 3, 4, 5}},
+			want: "10 14",
+		},
+		{
+			name: "test2",
+			args: args{arr: []int{256741038,623958417,467905213,714532089,938071625}}
+		}
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := captureOutput(func() { MiniMaxSum(tt.args.arr) }); strings.EqualFold(got, tt.want) {
+				t.Errorf("MiniMaxSum() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
