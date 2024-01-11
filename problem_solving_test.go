@@ -1,4 +1,4 @@
-package main
+package hackerrank
 
 import (
 	"bytes"
@@ -262,8 +262,9 @@ func TestMiniMaxSum(t *testing.T) {
 		},
 		{
 			name: "test2",
-			args: args{arr: []int{256741038,623958417,467905213,714532089,938071625}}
-		}
+			args: args{arr: []int32{256741038, 623958417, 467905213, 714532089, 938071625}},
+			want: "2063136757 2744467344",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

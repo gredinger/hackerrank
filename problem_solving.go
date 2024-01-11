@@ -1,13 +1,9 @@
-package main
+package hackerrank
 
 import (
 	"fmt"
 	"math"
 )
-
-func main() {
-	// do nothing
-}
 
 // simple-array-sum
 func SimpleArraySum(ar []int32) int32 {
