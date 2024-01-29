@@ -180,3 +180,16 @@ func MiniMaxSum(arr []int32) {
 	fmt.Printf("%v %v", total-int64(highest), total-int64(lowest))
 
 }
+
+// grading
+func GradingStudents(grades []int32) (rGrades []int32) {
+	for _, x := range grades {
+		dR := x % 5 //delta round value
+		if dR >= 3 && x >= 38 {
+			rGrades = append(rGrades, (5-dR)+x)
+			continue
+		}
+		rGrades = append(rGrades, x)
+	}
+	return rGrades
+}
