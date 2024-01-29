@@ -298,3 +298,55 @@ func TestGradingStudents(t *testing.T) {
 		})
 	}
 }
+
+func TestCountApplesAndOranges(t *testing.T) {
+	type args struct {
+		s       int32
+		t       int32
+		a       int32
+		b       int32
+		apples  []int32
+		oranges []int32
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "test 1",
+			args: args{
+				s:       7,
+				t:       11,
+				a:       5,
+				b:       15,
+				apples:  []int32{-2, 2, 1},
+				oranges: []int32{5, -6},
+			},
+			want: `1
+1`,
+		},
+		{
+			name: "test 2",
+			args: args{
+				s:       2,
+				t:       3,
+				a:       1,
+				b:       1,
+				apples:  []int32{2},
+				oranges: []int32{-2},
+			}, want: `1
+			1`,
+		},
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := captureOutput(func() {
+				CountApplesAndOranges(tt.args.s, tt.args.t, tt.args.a, tt.args.b, tt.args.apples, tt.args.oranges)
+			}); strings.EqualFold(got, tt.want) {
+				t.Errorf("CountApplesAndOranges() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

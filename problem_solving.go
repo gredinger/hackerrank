@@ -191,5 +191,25 @@ func GradingStudents(grades []int32) (rGrades []int32) {
 		}
 		rGrades = append(rGrades, x)
 	}
-	return rGrades
+	return
+}
+
+// apple-and-orange
+func CountApplesAndOranges(s int32, t int32, a int32, b int32, apples []int32, oranges []int32) {
+	// This entire thing feels messy... i think it needs to be generic
+	ac := 0 //apple count
+	for _, x := range apples {
+		ad := a + x //apple distance
+		if ad >= s && ad <= t {
+			ac++
+		}
+	}
+	oc := 0 // orange count
+	for _, x := range oranges {
+		od := b + x // orange distance
+		if od >= s && od <= t {
+			oc++
+		}
+	}
+	fmt.Printf("%v\n%v", ac, oc)
 }
